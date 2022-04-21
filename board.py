@@ -8,9 +8,18 @@ from sabot import Sabot
 
 class Board():
     bank = Player
-    player1 = Player
+    players = [Player]
     sabot = Sabot
-    def __init__(self,decks):
+
+    def __init__(self,decks,nbPlayers)->None:
         self.bank = Player("Banque")
-        self.player1 = Player("Joueur")
+        for i in range(nbPlayers):
+            name = "Joueur"+str(i)
+            self.players.append(Player(name))
         self.sabot = Sabot(decks)
+
+    def newRound(self):
+        self.bank.hit(self.sabot)
+        for i in range(len(self.players)):
+            self.players[i].hit(self.sabot)
+            self.players[i].hit(self.sabot)

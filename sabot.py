@@ -13,30 +13,30 @@ class Sabot():
         "10","J","Q","K","A",
     ]
     nbDeck = int
-    cards = []
+    cards = [str]
 
-    def __init__(self,nb):
+    def __init__(self,nb)->None:
         self.nbDeck = nb
         self.fill()
         
 
-    def fill(self):
+    def fill(self)->None:
         for i in range(self.nbDeck):
             for j in range(len(self.LIST_CARDS)):
                 self.cards.append(self.LIST_CARDS[j])
         random.shuffle(self.cards)
 
-    def getCard(self):
+    def getCard(self)->str:
         if self.isEmpty():self.fill()
         card = self.cards[0]
         self.cards.remove(self.cards[0])
         return card
 
-    def isEmpty(self):
+    def isEmpty(self)->bool:
         if len(self.cards)==0:return True
         else: return False
 
-    def getvalue(self,card):
+    def getvalue(self,card)->int:
         if card == "2":return 2
         if card == "3":return 3
         if card == "4":return 4
@@ -51,7 +51,7 @@ class Sabot():
         if card == "K":return 10
         if card == "A":return 11
 
-    def getHandValue(self,hand):
+    def getHandValue(self,hand)->int:
         value = 0
         for i in range(len(hand)):
             value += self.getvalue(hand[i])
