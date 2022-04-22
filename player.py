@@ -35,6 +35,13 @@ class Player():
             self.hit(sabot)
             self.splitHand = split
 
+    def getBet(self):
+        system("cls")
+        print(self.name,":")
+        print("\nYou have :",self.money,"$")
+        bet = int(input("\nYour bet : "))
+        self.newBet(bet)
+
     def newBet(self,bet):
         if self.money >= bet:
             self.bet += bet
@@ -75,6 +82,12 @@ class Player():
         system("cls")
         print(bank.toString())
         print(self.toString())
+
+    def win(self):
+        self.money+=self.bet*2
+
+    def draw(self):
+        self.money+=self.bet
 
     def toString(self)->str:
         txt=self.name
@@ -124,6 +137,12 @@ class Split():
     def double(self,sabot):
         if self.newBet(self.bet):
             self.hit(sabot)
+
+    def win(self):
+        self.owner.money+=self.bet*2
+
+    def draw(self):
+        self.owner.money+=self.bet
 
     def getTurn(self,sabot,bank):
         choice = None
