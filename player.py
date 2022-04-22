@@ -160,6 +160,10 @@ class Bank():
         self.hand.append(sabot.getCard(card))
         self.value = sabot.getHandValue(self.hand)
 
+    def end(self,sabot):
+        while self.value<17:
+            self.hit(sabot)
+
     def reset(self):
         self.hand.clear()
         self.value = 0

@@ -15,7 +15,7 @@ class Sabot():
     nbDeck = int
     cards = []
 
-    def __init__(self,nb)->None:
+    def __init__(self,nb=6)->None:
         self.nbDeck = nb
         self.fill()
         
