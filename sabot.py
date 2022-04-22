@@ -13,7 +13,7 @@ class Sabot():
         "10","J","Q","K","A",
     ]
     nbDeck = int
-    cards = [str]
+    cards = []
 
     def __init__(self,nb)->None:
         self.nbDeck = nb
@@ -21,16 +21,25 @@ class Sabot():
         
 
     def fill(self)->None:
+        self.cards.clear()
         for i in range(self.nbDeck):
             for j in range(len(self.LIST_CARDS)):
                 self.cards.append(self.LIST_CARDS[j])
         random.shuffle(self.cards)
 
-    def getCard(self)->str:
-        if self.isEmpty():self.fill()
-        card = self.cards[0]
-        self.cards.remove(self.cards[0])
-        return card
+    def getCard(self,card=None)->str:
+        if card != None:
+            if card not in self.cards:self.fill()
+            newCard = card
+            for i in range(len(self.cards)):
+                if card == self.cards[i]:
+                    self.cards.remove(self.cards[i])
+                    break
+        else:
+            if self.isEmpty():self.fill()
+            newCard = self.cards[0]
+            self.cards.remove(self.cards[0])
+        return newCard
 
     def isEmpty(self)->bool:
         if len(self.cards)==0:return True
@@ -57,3 +66,13 @@ class Sabot():
             value += self.getvalue(hand[i])
         if value > 21 and "A" in hand:value -= 10
         return value
+
+
+# DEBUG ZONE
+
+# test = Sabot(6)
+# hand = []
+# hand.append(test.getCard())
+# hand.append(test.getCard())
+# print(hand)
+# print(test.getHandValue(hand))
